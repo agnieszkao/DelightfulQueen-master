@@ -140,6 +140,10 @@ public class AwesomeProgressBar extends View {
         ObjectAnimator rotateAnimation = ObjectAnimator.ofFloat(this, "rotation", 0f, 360f);
         rotateAnimation.setInterpolator(new LinearInterpolator());
 
+        mAnimatorSet = new AnimatorSet();
+
+        mAnimatorSetCross = new AnimatorSet();
+
         mPlusAnimation = ValueAnimator.ofFloat(0, mRadius / 2f);
         mPlusAnimation.setDuration(mAnimationDuration);
         mPlusAnimation.setInterpolator(new OvershootInterpolator());
@@ -151,7 +155,7 @@ public class AwesomeProgressBar extends View {
             }
         });
 
-        mPlusAnimation.addListener(new Animator.AnimatorListener() {
+        mAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
                 mState = State.STATE_SUCCESS;
@@ -171,6 +175,8 @@ public class AwesomeProgressBar extends View {
             }
         });
 
+        mAnimatorSet.playTogether(mPlusAnimation, rotateAnimation);
+
         mCrossAnimation = ValueAnimator.ofFloat(0, mRadius / 2f);
         mCrossAnimation.setDuration(mAnimationDuration);
         mCrossAnimation.setInterpolator(new OvershootInterpolator());
@@ -181,7 +187,7 @@ public class AwesomeProgressBar extends View {
                 invalidate();
             }
         });
-        mCrossAnimation.addListener(new Animator.AnimatorListener() {
+        mAnimatorSetCross.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
                 mState = State.STATE_FAILURE;
@@ -201,10 +207,6 @@ public class AwesomeProgressBar extends View {
             }
         });
 
-        mAnimatorSet = new AnimatorSet();
-        mAnimatorSet.playTogether(mPlusAnimation, rotateAnimation);
-        
-        mAnimatorSetCross = new AnimatorSet();
         mAnimatorSetCross.playTogether(mCrossAnimation, rotateAnimation);
     }
 
