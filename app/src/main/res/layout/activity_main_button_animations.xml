@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="@dimen/default_layout_padding">
+
+    <Button
+        android:id="@+id/activity_main_btn_translate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_layout_padding"
+        android:text="@string/translate"/>
+
+    <Button
+        android:id="@+id/activity_main_btn_rotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_layout_padding"
+        android:text="@string/rotate"/>
+
+    <Button
+        android:id="@+id/activity_main_btn_scale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_layout_padding"
+        android:text="@string/scale"/>
+
+    <Button
+        android:id="@+id/activity_main_btn_alpha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_layout_padding"
+        android:text="@string/alpha"/>
+
+    <Button
+        android:id="@+id/activity_main_btn_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_layout_padding"
+        android:text="@string/move"/>
+
+
+
+</LinearLayout>

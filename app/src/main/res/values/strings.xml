@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">DelightfulQueen</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="translate">Translate</string>
+    <string name="rotate">Rotate</string>
+    <string name="scale">Scale</string>
+    <string name="alpha">Alpha</string>
+    <string name="move">Move</string>
+
+    <string name="plus">Plus</string>
+    <string name="cross">Cross</string>
+</resources>

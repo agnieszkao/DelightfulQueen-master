@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:interpolator="@android:interpolator/bounce"
+     android:shareInterpolator="true">
+
+    <translate
+        android:duration="1000"
+        android:fromXDelta="5"
+        android:fromYDelta="5"
+        android:toXDelta="70"
+        android:toYDelta="5"/>
+
+    <scale xmlns:android="http://schemas.android.com/apk/res/android"
+           android:duration="500"
+           android:fillAfter="true"
+           android:fillEnabled="true"
+           android:fromXScale="0.5"
+           android:fromYScale="0.5"
+           android:startOffset="1000"
+           android:toXScale="2.0"
+           android:toYScale="2.0">
+    </scale>
+</set>
