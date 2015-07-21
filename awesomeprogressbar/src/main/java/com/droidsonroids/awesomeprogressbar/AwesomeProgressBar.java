@@ -24,10 +24,8 @@ public class AwesomeProgressBar extends View {
     private State mState;
     private RectF mRectF;
     private AnimatorSet mAnimatorSet;
-    private AnimatorSet mAnimatorSetCross;
     private ValueAnimator mProgressAnimation;
-    private ValueAnimator mPlusAnimation;
-    private ValueAnimator mCrossAnimation;
+    private ValueAnimator mAnimation;
 
     private float mProgressValue;
     private float mLineLenght;
@@ -121,11 +119,7 @@ public class AwesomeProgressBar extends View {
             @Override
             public void onAnimationEnd(Animator animation) {
                 setClickable(true);
-                if (isAnimationSuccess) {
-                    mAnimatorSet.start();
-                } else {
-                    mAnimatorSetCross.start();
-                }
+                mAnimatorSet.start();
             }
 
             @Override
@@ -142,12 +136,10 @@ public class AwesomeProgressBar extends View {
 
         mAnimatorSet = new AnimatorSet();
 
-        mAnimatorSetCross = new AnimatorSet();
-
-        mPlusAnimation = ValueAnimator.ofFloat(0, mRadius / 2f);
-        mPlusAnimation.setDuration(mAnimationDuration);
-        mPlusAnimation.setInterpolator(new OvershootInterpolator());
-        mPlusAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        mAnimation = ValueAnimator.ofFloat(0, mRadius / 2f);
+        mAnimation.setDuration(mAnimationDuration);
+        mAnimation.setInterpolator(new OvershootInterpolator());
+        mAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mLineLenght = (float) animation.getAnimatedValue();
@@ -158,7 +150,10 @@ public class AwesomeProgressBar extends View {
         mAnimatorSet.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                mState = State.STATE_SUCCESS;
+                if (isAnimationSuccess)
+                    mState = State.STATE_SUCCESS;
+                else
+                    mState = State.STATE_FAILURE;
             }
 
             @Override
@@ -175,39 +170,7 @@ public class AwesomeProgressBar extends View {
             }
         });
 
-        mAnimatorSet.playTogether(mPlusAnimation, rotateAnimation);
-
-        mCrossAnimation = ValueAnimator.ofFloat(0, mRadius / 2f);
-        mCrossAnimation.setDuration(mAnimationDuration);
-        mCrossAnimation.setInterpolator(new OvershootInterpolator());
-        mCrossAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mLineLenght = (float) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
-        mAnimatorSetCross.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-                mState = State.STATE_FAILURE;
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                setClickable(true);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
-        });
-
-        mAnimatorSetCross.playTogether(mCrossAnimation, rotateAnimation);
+        mAnimatorSet.playTogether(mAnimation, rotateAnimation);
     }
 
     @Override
